@@ -1,0 +1,55 @@
+  html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+nav {
+  width: 50%;
+  display: flex;
+  float: center;
+  padding-top: 1em;
+}
+
+nav a {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: silver;
+}
+
+.current, .date, a:hover {
+  color: silver;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1rem;
+}
+
+.date {
+  padding-left: 1rem;
+}
+
+@font-face {
+  font-family: NiveauGroteskBold;
+  src: url(NiveauGroteskBold.otf);
+
+  font-style: normal;
+  font-weight: 800;
+}
+
+h1 {
+  font-family: NiveauGroteskBold;
+}
+

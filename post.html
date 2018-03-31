@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49814413-3"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-49814413-3');
+	</script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name- "robots" content="index, follow">
+	<meta name="description" content="Christopher is an aspiring Software Developer passionate about building dynamic products for the web">
+	<meta name="author" content="Christopher Wong">
+	<meta name="twitter:image" content="http://christopherwong.co/images/profile.jpg">
+	<meta property="og:image" content="http://christopherwong.co/images/profile.jpg">
+	<meta property="og:image:width" content="2435" />
+	<meta property="og:image:height" content="2435" />
+	<meta property="og:title" content="Christopher Wong" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="Christopher is an aspiring Software Developer passionate about building dynamic products for the web">
+	<meta name="author" content="Christopher Wong">
+
+	<link rel="stylesheet" href="css/grid/simple-grid.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<link rel="stylesheet" href="css/post.css" rel="stylesheet" type="text/css">
+	<title>Cheating at HQ Trivia</title>
+
+</head>
+<body>
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1><a href="blog.html">Back</a></h1>
+					<div class="post">
+						<span class="post-title">Cheating at HQ Trivia.</span>
+						<p class="post-date">January 27, 2018</p>
+						<p class="subtitle">The Problem.</p>
+						<span>
+							This all started due to the fact that I'm garbage at playing trivia. I set out to built a bot that predicted the answers to HQ Trivia questions.
+						</span>
+					</br></br>
+						<span>
+							The obvious way to cheat would be to Google the questions and look for an answer in the search results. By the time you would have typed the question, the 10 second timer would have likely expired. Maybe we can automate this process.
+						</span>
+						<p class="subtitle">Solution #1.</p>
+						<span>
+							I mirrored my iPhone's screen to my Mac via QuickTime and built a small Python script that did the following:
+							<ol>
+								<li>
+									Using Python's subprocess module I was able to call macOS's screen capture procedure which automatically captured the area containing the current question and list of possible answers. 
+								</li>
+								<li>
+									Run optical character recognition (OCR) on the screen shot using Google Cloud's Vision API and format the response into a simple JSON object containing four fields: the question and three multiple choice options.
+								</li>
+								<li>
+									Send a GET request to Google's custom search API with the question returned from OCR and a parameter specifying that we want the first 50 pages of results.
+								</li>
+								<li>
+									Thankfully, the Google search results is easily parsable HTML. Using BeautifulSoup I pulled out all the link preview text, denoted by HTML element <i>&ltspan class="st"&gt</i>.
+								</li>
+								<li>
+									Rank the three possible choices by scanning for occurrences of each choice within the Google search results. If the question contained the word "not" choose the choice that occurred least frequently.
+								</li>
+							</ol>
+							This method worked really well with around 60% accuracy. Correctness suffered on "which of these" type questions and didn't perform all that well on questions with "NOT" in them, as the answers may not appear in the search results at all. There were a few problems with this approach though. The biggest issue was that it heavily relied on the Google Vision API returning the parsed image in time; a second or two delay could be the difference between a correct or incorrect answer. Sometimes this failed completely at random. Anyone that's played HQ Trivia before knows that the 10 second timer actually starts when the host starts reading the question, not when it fully appears on screen. This results in even more lost time, waiting for the question to fully appear. The biggest drawback? Each time a question comes on screen, you have to run the script to kick off the bot.
+						</span>
+						<p class="subtitle">Solution #2.</p>
+						<span>
+							To get around the delay related to OCR, I found a new method of retrieving the questions and answers.
+							<ol>
+								<li>
+									Inspect HQ Trivia web traffic using Charles to find <i>userId</i> and something called a <i>Bearer</i> string which is just another unique authorization code for each user.
+								</li>
+								<li>
+									Using a new Python script, send a GET request to the HQ API server with the authorization data retrieved to get a JSON object containing details about whether the game was live. If the game was live, the API provides a live broadcast socketURL for the game.
+								</li>
+								<li>
+									After cleaning up the response from the socketURL (removing control characters), you're left with a object containing the questions and answers direct from HQ.	
+								</li>
+							</ol>
+							The benefit of this method is that the question and answers are retrieved by the bot automatically before players of the game even get to see them. Since the bot directly access the HQ API, it can read the questions automatically in a loop as they're released. You essentially see the question at the same time as the host. Using this new retrieval method to get the question (avoiding screen capture and the Google Vision API), combined with the Google search method from my first attempt, the bot is able to reach about 90% accuracy. With a little bit of luck, that might just win you the game.
+						</span>
+						<p class="subtitle">Solution #3.</p>
+						<span>
+							<a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">Machine Learning and Artificial Intelligence...</a>
+						</span>
+						<p class="subtitle">Update:</p>
+						<span>
+							<span>They shut it down.</span>
+						</span>
+						<p style="margin-top: 5vh">Some other people working on similar ideas:</p>
+						<span>
+							<ul>
+								<li><a target="_blank" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=7&cad=rja&uact=8&ved=0ahUKEwi8y-rw7PnYAhVSJt8KHeSuDyYQFghMMAY&url=https%3A%2F%2Fmedium.com%2F%40tobymellor%2Fhq-trivia-using-bots-to-win-money-from-online-game-shows-ce2a1b11828b&usg=AOvVaw2x8PuD-cvBQ3A9peOzimKN">Toby Mellor</a></li>
+								<li><a arget="_blank" href="https://github.com/mikealmond/hq-trivia-assistant">Mike Almond</a></li>
+							</ul>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

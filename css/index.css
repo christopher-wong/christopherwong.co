@@ -1,0 +1,207 @@
+@font-face {
+  font-family: NiveauGroteskBold;
+  src: url(NiveauGroteskBold.otf);
+
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: NiveauGroteskMedium;
+  src: url(NiveauGroteskMedium.otf);
+
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: NiveauGroteskRegular;
+  src: url(NiveauGroteskRegular.otf);
+
+  font-style: normal;
+  font-weight: 300;
+}
+
+
+/*@font-face {
+  font-family: NiveauGroteskLight;
+  src: url(NiveauGroteskLight.otf);
+
+  font-style: normal;
+  font-weight: 200;
+}*/
+
+@font-face {
+  font-family: NiveauGroteskExtraLight;
+  src: url(NiveauGroteskExtraLight.otf);
+
+  font-style: normal;
+  font-weight: 100;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: NiveauGroteskBold;
+}
+
+h2 {
+  font-family: NiveauGroteskMedium;
+}
+
+p {
+  font-family: NiveauGroteskExtraLight;
+  font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    padding: 0;
+    width: 45%;
+    align: center;
+}
+
+.learn-more {
+  font-family: NiveauGroteskRegular;
+}
+
+.email {
+  display: none;
+  /*display: flex;*/
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.digitalocean {
+  color: #0080FF;
+  font-family: NiveauGroteskRegular;
+}
+
+.digitalocean:hover {
+  color: #025BB3;
+  font-family: NiveauGroteskRegular;
+}
+
+.autodesk {
+  color: #1858A8;
+  font-family: NiveauGroteskRegular;
+}
+
+.autodesk:hover {
+  color: #163C6C;
+  font-family: NiveauGroteskRegular;
+}
+
+.firstfuel {
+  color: #24A824;
+  font-family: NiveauGroteskRegular;
+}
+
+.firstfuel:hover {
+  color: #156615;
+  font-family: NiveauGroteskRegular;
+}
+
+.underline-special {
+  border-bottom: 1px dotted #2c3e50;
+	text-decoration: none;
+  color: #2c3e50;
+}
+
+.custom-link {
+  border-bottom: 1px dotted;
+}
+
+.blurb {
+  margin-top: 4vh;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fa-facebook-official:hover {
+  color: #d5dbdb;
+}
+
+.fa-twitter:hover {
+  color: #d5dbdb;
+}
+
+.fa-instagram:hover {
+  color: #d5dbdb;
+}
+
+.fa-linkedin:hover {
+  color: #d5dbdb;
+}
+
+.fa-file-text:hover {
+  color: #d5dbdb;
+}
+
+.fa-envelope-o:hover {
+  color: #d5dbdb;
+}
+
+.active {
+  color: #d5dbdb;
+}
+
+.font-emphasis {
+  font-family: NiveauGroteskRegular;
+  color: #555;
+}
+
+#red-link {
+  color: #c0392b;
+  font-family: NiveauGroteskRegular;
+}
+
+nav {
+  width: 50%;
+  display: flex;
+  float: center;
+  padding-top: 1em;
+}
+
+nav a {
+  width: 100%;
+}
+
+nav a:hover {
+  color: silver;
+}
+
+.current, .date, a:hover {
+  color: silver;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.date {
+  padding-left: 1rem;
+}
+
